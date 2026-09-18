@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}Find Suitable Teams for a Venue{% endblock %}
+
+{% block content %}
+    <h1>Find Suitable Teams for a Venue</h1>
+
+    <form method="POST" action="/suitable_team_for_venue">
+        <label for="venue_id"><strong>Choose a Venue:</strong></label>
+        <select name="venue_id" id="venue_id" required>
+            <option value="" disabled selected>Select a venue...</option>
+            {% for venue in venues %}
+                <option value="{{ venue.venue_id }}">{{ venue.name }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Search Matches</button>
+    </form>
+
+    {% if selected_venue %}
+        <h2>Results for: {{ selected_venue }}</h2>
+        {% if teams %}
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Team Name</th>
+                        <th>Matched Audience</th>
+                        <th>Hourly Rate</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for team in teams %}
+                    <tr>
+                        
+                        <td>{{ team.name }}</td>
+                        <td>{{ team.category }}</td>
+                        <td>£{{ team.hourly_rate }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No teams found for this venue.</p>
+        {% endif %}
+    {% endif %}
+{% endblock %}

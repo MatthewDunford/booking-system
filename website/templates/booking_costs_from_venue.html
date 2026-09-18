@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Event Cost & Budget Analysis Through Venue{% endblock %}
+
+{% block content %}
+    <h1>Event Cost & Budget Analysis Through Venue</h1>
+
+    <form method="POST" action="/booking_costs_from_venue">
+        <label><strong>Select a Venue:</strong></label>
+        <select name="venue_selection_id" required>
+            <option value="" disabled selected>Choose a location...</option>
+            {% for venue in venues_dropdown %}
+                <option value="{{ venue.venue_id }}">{{ venue.name }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Show Bookings</button>
+    </form>
+
+    <hr>
+
+    {% if selected_name %}
+        <h2>Bookings at: {{ selected_name }}</h2>
+        
+        {% if bookings|length == 0 %}
+            <p>No bookings found for this venue.</p>
+        {% else %}
+            <table border="1" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+                <thead style="background-color: #e0e0e0;">
+                    <tr>
+                        <th>Team Name</th>
+                        <th>Start Date/Time</th>
+                        <th>End Date/Time</th>
+                        <th>Duration (Hrs)</th>
+                        <th>Team Rate</th>
+                        <th>Total Cost</th>
+                        <th>Venue Max Limit</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in bookings %}
+                    <tr style="font-weight: bold;
+                                text-align: center;
+                                {% if row.booking_status == 'OVER BUDGET' %}
+                                    background-color: #ffdce0; color: #af0000;
+                                {% elif row.booking_status == 'WITHIN BUDGET' %}
+                                    background-color: #d4edda; color: #155724;
+                                {% endif %}
+                        ">
+                        <td>{{ row.team_name }}</td>
+                        <td>{{ row.start_time }}</td>
+                        <td>{{ row.end_time }}</td>
+                        <td>{{ row.duration_in_hours }}</td>
+                        <td>£{{ row.team_hourly_rate }}</td>
+                        <td>£{{ row.total_booking_cost }}</td>
+                        <td>£{{ row.venue_max_fee }}</td>
+                        <td>{{ row.booking_status }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    {% endif %}
+
+{% endblock %}

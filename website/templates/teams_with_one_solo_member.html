@@ -1,0 +1,32 @@
+
+{% extends "base.html" %}
+
+{% block title %}Solo Member Teams{% endblock %}
+
+
+
+
+{% block content %}
+    <h1>Solo Member Teams</h1>
+
+    {% if teams %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Team Name</th>
+                    <th>Solo Member Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for team in teams %}
+                <tr>
+                    <td>{{ team.team_name }}</td>
+                    <td>{{ team.member_name }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No solo teams found in the database.</p>
+    {% endif %}
+{% endblock %}

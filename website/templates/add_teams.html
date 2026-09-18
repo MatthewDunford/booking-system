@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Add New Teams & Members{% endblock %}
+
+{% block content %}
+    <h1>Add New Teams & Members</h1>
+
+    {% if message %}
+        <div style="padding: 15px; background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; margin-bottom: 20px;">
+            <strong>{{ message }}</strong>
+        </div>
+    {% endif %}
+
+    <form method="POST" action="/add_teams">
+        
+        <fieldset style="margin-bottom: 20px; padding: 15px; border: 2px solid #ddd;">
+            <legend><strong>Adding Team</strong></legend>
+            
+            <label>Team Name:</label><br>
+            <input type="text" name="table_name" required placeholder="e.g. The Paul Jackson team"><br><br>
+            
+            <label>Hourly Rate (£):</label><br>
+            <input type="number" step="1" name="table_rate" required placeholder="50.00"><br><br>
+
+            <h3>Members</h3>
+            <label>Member 1 Name:</label><br>
+            <input type="text" name="table_members_1" required placeholder="e.g. Richard Hammond"><br><br>
+            
+            <label>Member 2 Name:</label><br>
+            <input type="text" name="table_members_2" required placeholder="e.g. James May"><br>
+        </fieldset>
+
+        <button type="submit" style="padding: 10px 20px; background-color: #28a745; color: white; border: none; cursor: pointer; font-size: 16px;">
+            Add Teams to Database
+        </button>
+    </form>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Venues Hosting 3+ Target Audiences{% endblock %}
+
+{% block content %}
+    <h1>Venues Hosting 3+ Target Audiences</h1>
+
+    {% if venues %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Venue Name</th>
+                    <th>Count</th>
+                    <th>Audience Categories</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for venue in venues %}
+                <tr>
+                    <td>{{ venue.venue_name }}</td>
+                    <td>{{ venue.audience_count }}</td>
+                    <td>{{ venue.audience_list }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No venues found hosting 3 or more target audiences.</p>
+    {% endif %}
+{% endblock %}

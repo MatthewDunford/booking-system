@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Members of Non-Solo Teams{% endblock %}
+
+{% block content %}
+    <h1>Members of Non-Solo Teams</h1>
+
+    {% if team_members %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Team Name</th>
+                    <th>Member Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in team_members %}
+                <tr>
+                    <td>{{ row.team_name }}</td>
+                    <td>{{ row.member_name }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No teams with multiple members were found.</p>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Event Cost & Budget Analysis Through Team{% endblock %}
+
+{% block content %}
+    <h1>Event Cost & Budget Analysis Through Team</h1>
+
+    <form method="POST" action="/booking_costs_from_team">
+        <label><strong>Choose a Team:</strong></label>
+        <select name="team_selection_id" required>
+            <option value="" disabled selected>Select a team...</option>
+            {% for team in teams_dropdown %}
+                <option value="{{ team.team_id }}">{{ team.name }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Search Matches</button>
+    </form>
+
+    <hr>
+
+    {% if selected_name %}
+        <h2>Results for: {{ selected_name }}</h2>
+        
+        <table border="1" style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+            <thead style="background-color: #f2f2f2;">
+                <tr>
+                    <th>Venue</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Hourly Rate</th>
+                    <th>Hours</th>
+                    <th>Total Cost</th>
+                    <th>Max Fee</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in bookings %}
+                <tr style = "font-weight: bold;
+                        text-align: center;
+                        {% if row.booking_status == 'OVER BUDGET' %}
+                            background-color: #ffdce0; color: #af0000;
+                        {% elif row.booking_status == 'WITHIN BUDGET' %}
+                            background-color: #d4edda; color: #155724;
+                        {% endif %}
+                    ">
+                    <td>{{ row.venue_name }}</td>
+                    <td>{{ row.start_time }}</td>
+                    <td>{{ row.end_time }}</td>
+                    <td>£{{ row.team_hourly_rate }}</td>
+                    <td>{{ row.duration_in_hours }}</td>
+                    <td><strong>£{{ row.total_booking_cost }}</strong></td>
+                    <td>£{{ row.venue_max_fee }}</td>
+                    <td>{{ row.booking_status }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+{% endblock %}

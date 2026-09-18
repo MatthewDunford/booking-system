@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}TB Promotions{% endblock %}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: Arial; 
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        .site-header {
+            background-color: #222;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .site-header h1 {
+            margin: 0;
+            font-family: 'Zilla Slab'; 
+            font-size: 6rem;
+        }
+
+  
+        nav {
+            background-color: #333;
+            display: flex;
+            align-items: center;
+            padding: 15px 25px;
+        }
+
+        .nav-logo img {
+            height: 100px;
+            width: auto;
+            margin-right: 25px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            flex-wrap: wrap;
+
+
+            border-left: 3px solid #29516c; 
+            padding: 25px 0 25px 20px;
+            margin-left: 5px;     
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+            transform: scale(1.1);
+            color: #ffffff;
+        } 
+        
+        main {
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto 60px auto;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            font-family: 'Zilla Slab'; 
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <h1>TB Promotions</h1>
+</header>
+
+<nav>
+    <a href="/" class="nav-logo">
+        <img src="static/tb_promotions_tracker_image.png" alt="TBPT Logo">
+    </a>
+
+    <div class="nav-links">
+        <a href="/suitable_team_for_venue">Suitable team for venue</a>
+        <a href="/suitable_team_for_target_audience">Suitable team for target audience</a>
+        <a href="/teams_with_one_solo_member">Teams with one solo member</a>
+        <a href="/venue_with_3_or_more_target_audiences">Venue with 3 or more target audiences</a>
+        <a href="/non_solo_teams">Non solo teams</a>
+        <a href="/booking_costs_from_team">Booking costs(team)</a>
+        <a href="/booking_costs_from_venue">Booking costs(venue)</a>
+        <a href="/add_teams">Add new teams</a>
+    </div>
+</nav>
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer>
+    TB Promotions Tracker (TBPT)
+</footer>
+
+</body>
+</html>

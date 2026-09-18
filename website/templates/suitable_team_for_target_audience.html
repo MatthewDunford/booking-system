@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}Find Suitable Teams for a Target Audience{% endblock %}
+
+{% block content %}
+    <h1>Find Suitable Teams for a Target Audience</h1>
+
+    <form method="POST" action="/suitable_team_for_target_audience">
+        <label for="target_audience_id"><strong>Choose an Audience:</strong></label>
+        <select name="target_audience_id" id="target_audience_id" required>
+            <option value="" disabled selected>Select an audience...</option>
+            {% for audience in audiences %}
+                <option value="{{ audience.target_audience_id }}">{{ audience.category }}</option>
+            {% endfor %}
+        </select>
+        <button type="submit">Search Matches</button>
+    </form>
+
+    {% if selected_venue %}
+        <h2>Results for Audience: {{ selected_venue }}</h2>
+        {% if teams %}
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Team Name</th>
+                        <th>Matched Audience</th>
+                        <th>Hourly Rate</th>
+                        <th>Suitable Venue</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for team in teams %}
+                    <tr>
+                        <td>{{ team.team_name }}</td>
+                        <td>{{ team.category }}</td>
+                        <td>£{{ team.hourly_rate }}</td>
+                        <td>{{ team.venue_name }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No teams found for this audience type.</p>
+        {% endif %}
+    {% endif %}
+{% endblock %}
